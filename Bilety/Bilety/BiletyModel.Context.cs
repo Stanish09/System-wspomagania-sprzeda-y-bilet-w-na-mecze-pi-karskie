@@ -32,10 +32,9 @@ namespace Bilety
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Bilety> Bilety { get; set; }
         public virtual DbSet<Miejsca> Miejsca { get; set; }
-        public virtual DbSet<Transakcje> Transakcje { get; set; }
         public virtual DbSet<Wydarzenia> Wydarzenia { get; set; }
+        public virtual DbSet<Bilety> BiletySet { get; set; }
     
         public virtual ObjectResult<Podsumowanie_Result> Podsumowanie(Nullable<int> param1, Nullable<int> param2)
         {

@@ -17,8 +17,8 @@ namespace Bilety
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Wydarzenia()
         {
-            this.Bilety = new HashSet<Bilety>();
             this.Miejsca = new HashSet<Miejsca>();
+            this.Bilety1 = new HashSet<Bilety>();
         }
     
         public int IdWydarzenia { get; set; }
@@ -26,8 +26,8 @@ namespace Bilety
         public Nullable<System.DateTime> DataWyd { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bilety> Bilety { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Miejsca> Miejsca { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bilety> Bilety1 { get; set; }
     }
 }

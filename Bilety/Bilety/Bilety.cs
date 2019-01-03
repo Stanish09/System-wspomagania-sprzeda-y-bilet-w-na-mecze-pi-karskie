@@ -14,20 +14,11 @@ namespace Bilety
     
     public partial class Bilety
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Bilety()
-        {
-            this.Transakcje = new HashSet<Transakcje>();
-        }
-    
         public int IdBiletu { get; set; }
         public int IdMiejsca { get; set; }
-        public string Przeciwnik { get; set; }
         public int IdWydarzenia { get; set; }
     
         public virtual Miejsca Miejsca { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transakcje> Transakcje { get; set; }
         public virtual Wydarzenia Wydarzenia { get; set; }
     }
 }

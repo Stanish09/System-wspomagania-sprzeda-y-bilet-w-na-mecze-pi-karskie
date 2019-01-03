@@ -10,18 +10,15 @@
         <EntityTypeShape EntityType="BiletyModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BiletyModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BiletyModel.AspNetUsers" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="BiletyModel.Bilety" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="BiletyModel.Miejsca" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BiletyModel.Transakcje" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="BiletyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BiletyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="BiletyModel.FK__Transakcje__Id__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="BiletyModel.FK__Bilety__IdMiejsc__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="BiletyModel.FK__Transakcj__IdBil__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="BiletyModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="BiletyModel.Wydarzenia" Width="1.5" PointX="1.5" PointY="1.125" />
-        <AssociationConnector Association="BiletyModel.FK__Bilety__IdWydarz__49C3F6B7" />
         <AssociationConnector Association="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" />
+        <EntityTypeShape EntityType="BiletyModel.Bilety" Width="1.5" PointX="6" PointY="0.75" />
+        <AssociationConnector Association="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" />
+        <AssociationConnector Association="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

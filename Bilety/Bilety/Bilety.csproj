@@ -241,9 +241,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Transakcje.cs">
-      <DependentUpon>BiletyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Wydarzenia.cs">
       <DependentUpon>BiletyModel.tt</DependentUpon>
     </Compile>
