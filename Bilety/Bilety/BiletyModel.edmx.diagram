@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="123a2fd74be24c039abc4fd3912f23c2" Name="Diagram1">
+        <EntityTypeShape EntityType="BiletyModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.AspNetUsers" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.Bilety" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.Miejsca" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BiletyModel.Transakcje" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="BiletyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletyModel.FK__Transakcje__Id__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletyModel.FK__Bilety__IdMiejsc__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletyModel.FK__Transakcj__IdBil__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="BiletyModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BiletyModel.Wydarzenia" Width="1.5" PointX="1.5" PointY="1.125" />
+        <AssociationConnector Association="BiletyModel.FK__Bilety__IdWydarz__49C3F6B7" />
+        <AssociationConnector Association="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

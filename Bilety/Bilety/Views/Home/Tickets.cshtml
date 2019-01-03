@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Bilety";
+}
+
+
+
+<div class="jumbotron">
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+    <center>
+        <div><img src="~/Content/stadion.jpg" height="250" width="500"/></div>
+    </center>
+    <p>
+        Przeciwnik: @ViewBag.Przeciwnik
+
+        <table>
+            <tr>
+                <td>Sektor</td>
+                <td>Cena</td>
+                <td>Pozostało</td>
+            </tr>
+            <tr>
+                <td>I strefa</td>
+                <td>@ViewBag.Cena0 zł</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>II strefa</td>
+                <td>@ViewBag.Cena1 zł</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>III strefa</td>
+                <td>@ViewBag.Cena2 zł</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>VIP Lite</td>
+                <td>@ViewBag.Cena3 zł</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>VIP</td>
+                <td>@ViewBag.Cena4 zł</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Rodzinny</td>
+                <td>@ViewBag.Cena5 zł</td>
+                <td></td>
+            </tr>
+
+
+
+
+
+        </table>
+
+
+
+
+    </p>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+</div>

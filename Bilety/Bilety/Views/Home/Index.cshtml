@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <center><img src="~/Content/herb.png" width="100" height="100" /></center>
+    <h2>Witaj kibicu!</h2>>
+    <h5>Witamy na stronie klubu ŚWIT Nowy Dwór Mazowiecki. Zapraszamy do zapoznania się z ofertą biletów na najbliższe mecze oraz informacjami na jego temat!</h5>
+
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Informacje</h3>
+            <p class="normal-text">
+                Chcesz dowiedzieć się więcej o klubie? Zapraszamy!
+            </p>
+            <p><div class="btn btn-default">@Html.ActionLink("Informacje", "About", "Home")</div></p>
+
+        </div>
+        <div class="col-md-4">
+            <h3>Bilety</h3>
+            <p>Kup bilet na najbliższy mecz już teraz!</p>
+            <p><div class="btn btn-default">@Html.ActionLink("Bilety", "Events", "Home")</div></p>
+        </div>
+    </div>
+</div>
