@@ -16,9 +16,10 @@ namespace Bilety
     {
         public int IdBiletu { get; set; }
         public int IdMiejsca { get; set; }
-        public int IdWydarzenia { get; set; }
+        public string Id { get; set; }
+        public System.DateTime DataTran { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Miejsca Miejsca { get; set; }
-        public virtual Wydarzenia Wydarzenia { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace Bilety
         public Wydarzenia()
         {
             this.Miejsca = new HashSet<Miejsca>();
-            this.Bilety1 = new HashSet<Bilety>();
         }
     
         public int IdWydarzenia { get; set; }
@@ -27,7 +26,5 @@ namespace Bilety
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Miejsca> Miejsca { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bilety> Bilety1 { get; set; }
     }
 }

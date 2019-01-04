@@ -16,10 +16,10 @@
         <AssociationConnector Association="BiletyModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="BiletyModel.Wydarzenia" Width="1.5" PointX="1.5" PointY="1.125" />
         <AssociationConnector Association="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" />
-        <EntityTypeShape EntityType="BiletyModel.Bilety" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="BiletyModel.Bilety" Width="1.5" PointX="8" PointY="3.375" />
+        <AssociationConnector Association="BiletyModel.FK__Bilety__Id__5BE2A6F2" />
         <AssociationConnector Association="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" />
-        <AssociationConnector Association="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

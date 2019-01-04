@@ -75,7 +75,6 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="PokazCeny" FunctionName="BiletyModel.Store.PokazCeny" />
     <EntitySetMapping Name="Wydarzenia">
       <EntityTypeMapping TypeName="BiletyModel.Wydarzenia">
         <MappingFragment StoreEntitySet="Wydarzenia">
@@ -88,20 +87,45 @@
     <FunctionImportMapping FunctionImportName="WyswietlPrzeciwnika" FunctionName="BiletyModel.Store.WyswietlPrzeciwnika" />
     <FunctionImportMapping FunctionImportName="WyswietlWydarzenia" FunctionName="BiletyModel.Store.WyswietlWydarzenia">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="BiletyModel.WyswietlWydarzenia_Result">
+        <ComplexTypeMapping TypeName="BiletyModel.WyswietlWydarzenia_Result2">
+          <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
           <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
           <ScalarProperty Name="DataWyd" ColumnName="DataWyd" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="BiletySet">
+    <FunctionImportMapping FunctionImportName="OdejmijMiejsce" FunctionName="BiletyModel.Store.OdejmijMiejsce" />
+    <FunctionImportMapping FunctionImportName="Transakcja" FunctionName="BiletyModel.Store.Transakcja" />
+    <EntitySetMapping Name="Bilety">
       <EntityTypeMapping TypeName="BiletyModel.Bilety">
         <MappingFragment StoreEntitySet="Bilety">
-          <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
+          <ScalarProperty Name="DataTran" ColumnName="DataTran" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
           <ScalarProperty Name="IdBiletu" ColumnName="IdBiletu" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="PokazCeny" FunctionName="BiletyModel.Store.PokazCeny">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BiletyModel.PokazCeny_Result2">
+          <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
+          <ScalarProperty Name="Sektor" ColumnName="Sektor" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Ile_Miejsc" ColumnName="Ile_Miejsc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="PokazOstatnie" FunctionName="BiletyModel.Store.PokazOstatnie">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BiletyModel.PokazOstatnie_Result">
+          <ScalarProperty Name="DataTran" ColumnName="DataTran" />
+          <ScalarProperty Name="Sektor" ColumnName="Sektor" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
+          <ScalarProperty Name="DataWyd" ColumnName="DataWyd" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

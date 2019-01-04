@@ -20,40 +20,22 @@
                 <td>Cena</td>
                 <td>Pozostało</td>
             </tr>
+            @foreach (var c in ViewBag.Cena)
+            {
             <tr>
-                <td>I strefa</td>
-                <td>@ViewBag.Cena0 zł</td>
-                <td></td>
+                <td>@c.Sektor</td>
+                <td>@c.Cena zł</td>
+                <td>@c.Ile_Miejsc</td>
+                @if (User.Identity.IsAuthenticated)
+                { 
+                    <td><a href="/Home/Success/@c.IdMiejsca"> <div class="btn btn-default"> KUP TERAZ </div></a></td>
+                }
+                else
+                {
+                    <td><a href="/Account/Login"> <div class="btn btn-default"> Zaloguj się, aby kupić </div></a></td>
+                }
             </tr>
-            <tr>
-                <td>II strefa</td>
-                <td>@ViewBag.Cena1 zł</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>III strefa</td>
-                <td>@ViewBag.Cena2 zł</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>VIP Lite</td>
-                <td>@ViewBag.Cena3 zł</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>VIP</td>
-                <td>@ViewBag.Cena4 zł</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Rodzinny</td>
-                <td>@ViewBag.Cena5 zł</td>
-                <td></td>
-            </tr>
-
-
-
-
+            }
 
         </table>
 

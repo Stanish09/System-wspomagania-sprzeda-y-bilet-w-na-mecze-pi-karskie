@@ -34,7 +34,7 @@ namespace Bilety
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Miejsca> Miejsca { get; set; }
         public virtual DbSet<Wydarzenia> Wydarzenia { get; set; }
-        public virtual DbSet<Bilety> BiletySet { get; set; }
+        public virtual DbSet<Bilety> Bilety { get; set; }
     
         public virtual ObjectResult<Podsumowanie_Result> Podsumowanie(Nullable<int> param1, Nullable<int> param2)
         {
@@ -49,11 +49,6 @@ namespace Bilety
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Podsumowanie_Result>("Podsumowanie", param1Parameter, param2Parameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> PokazCeny()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("PokazCeny");
-        }
-    
         public virtual ObjectResult<string> WyswietlPrzeciwnika(Nullable<int> idwyd)
         {
             var idwydParameter = idwyd.HasValue ?
@@ -63,9 +58,45 @@ namespace Bilety
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("WyswietlPrzeciwnika", idwydParameter);
         }
     
-        public virtual ObjectResult<WyswietlWydarzenia_Result> WyswietlWydarzenia()
+        public virtual ObjectResult<WyswietlWydarzenia_Result2> WyswietlWydarzenia()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WyswietlWydarzenia_Result>("WyswietlWydarzenia");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WyswietlWydarzenia_Result2>("WyswietlWydarzenia");
+        }
+    
+        public virtual int OdejmijMiejsce(Nullable<int> idm)
+        {
+            var idmParameter = idm.HasValue ?
+                new ObjectParameter("idm", idm) :
+                new ObjectParameter("idm", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("OdejmijMiejsce", idmParameter);
+        }
+    
+        public virtual int Transakcja(string idu, Nullable<int> idm)
+        {
+            var iduParameter = idu != null ?
+                new ObjectParameter("idu", idu) :
+                new ObjectParameter("idu", typeof(string));
+    
+            var idmParameter = idm.HasValue ?
+                new ObjectParameter("idm", idm) :
+                new ObjectParameter("idm", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Transakcja", iduParameter, idmParameter);
+        }
+    
+        public virtual ObjectResult<PokazCeny_Result2> PokazCeny(Nullable<int> idwyd)
+        {
+            var idwydParameter = idwyd.HasValue ?
+                new ObjectParameter("idwyd", idwyd) :
+                new ObjectParameter("idwyd", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PokazCeny_Result2>("PokazCeny", idwydParameter);
+        }
+    
+        public virtual ObjectResult<PokazOstatnie_Result> PokazOstatnie()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PokazOstatnie_Result>("PokazOstatnie");
         }
     }
 }

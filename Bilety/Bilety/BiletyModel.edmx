@@ -72,7 +72,8 @@
           </Key>
           <Property Name="IdBiletu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdMiejsca" Type="int" Nullable="false" />
-          <Property Name="IdWydarzenia" Type="int" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DataTran" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Miejsca">
           <Key>
@@ -92,6 +93,18 @@
           <Property Name="Przeciwnik" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="DataWyd" Type="date" />
         </EntityType>
+        <Association Name="FK__Bilety__Id__5BE2A6F2">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bilety">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Bilety__IdMiejsc__4D94879B">
           <End Role="Miejsca" Type="Self.Miejsca" Multiplicity="1" />
           <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
@@ -101,18 +114,6 @@
             </Principal>
             <Dependent Role="Bilety">
               <PropertyRef Name="IdMiejsca" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Bilety__IdWydarz__49C3F6B7">
-          <End Role="Wydarzenia" Type="Self.Wydarzenia" Multiplicity="1" />
-          <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wydarzenia">
-              <PropertyRef Name="IdWydarzenia" />
-            </Principal>
-            <Dependent Role="Bilety">
-              <PropertyRef Name="IdWydarzenia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -184,7 +185,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="PokazCeny" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="OdejmijMiejsce" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idm" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PokazCeny" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idwyd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PokazOstatnie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Transakcja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idu" Type="nvarchar" Mode="In" />
+          <Parameter Name="idm" Type="int" Mode="In" />
+        </Function>
         <Function Name="WyswietlPrzeciwnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idwyd" Type="int" Mode="In" />
         </Function>
@@ -199,12 +210,12 @@
           <EntitySet Name="Bilety" EntityType="Self.Bilety" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Miejsca" EntityType="Self.Miejsca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Wydarzenia" EntityType="Self.Wydarzenia" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Bilety__IdMiejsc__4D94879B" Association="Self.FK__Bilety__IdMiejsc__4D94879B">
-            <End Role="Miejsca" EntitySet="Miejsca" />
+          <AssociationSet Name="FK__Bilety__Id__5BE2A6F2" Association="Self.FK__Bilety__Id__5BE2A6F2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Bilety" EntitySet="Bilety" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bilety__IdWydarz__49C3F6B7" Association="Self.FK__Bilety__IdWydarz__49C3F6B7">
-            <End Role="Wydarzenia" EntitySet="Wydarzenia" />
+          <AssociationSet Name="FK__Bilety__IdMiejsc__4D94879B" Association="Self.FK__Bilety__IdMiejsc__4D94879B">
+            <End Role="Miejsca" EntitySet="Miejsca" />
             <End Role="Bilety" EntitySet="Bilety" />
           </AssociationSet>
           <AssociationSet Name="FK__Miejsca__IdWydar__4E88ABD4" Association="Self.FK__Miejsca__IdWydar__4E88ABD4">
@@ -290,6 +301,7 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Bilety" Relationship="BiletyModel.FK__Bilety__Id__5BE2A6F2" FromRole="AspNetUsers" ToRole="Bilety" />
         </EntityType>
         <EntityType Name="Miejsca">
           <Key>
@@ -301,7 +313,7 @@
           <Property Name="Ile_Miejsc" Type="Int32" Nullable="false" />
           <Property Name="IdWydarzenia" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Wydarzenia" Relationship="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" FromRole="Miejsca" ToRole="Wydarzenia" />
-          <NavigationProperty Name="Bilety1" Relationship="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" FromRole="Miejsca" ToRole="Bilety1" />
+          <NavigationProperty Name="Bilety" Relationship="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" FromRole="Miejsca" ToRole="Bilety" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -358,7 +370,6 @@
             <Parameter Name="param1" Mode="In" Type="Int32" />
             <Parameter Name="param2" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PokazCeny" ReturnType="Collection(Decimal)" />
           <EntitySet Name="Wydarzenia" EntityType="BiletyModel.Wydarzenia" />
           <AssociationSet Name="FK__Miejsca__IdWydar__4E88ABD4" Association="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4">
             <End Role="Wydarzenia" EntitySet="Wydarzenia" />
@@ -367,16 +378,27 @@
           <FunctionImport Name="WyswietlPrzeciwnika" ReturnType="Collection(String)">
           <Parameter Name="idwyd" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="WyswietlWydarzenia" ReturnType="Collection(BiletyModel.WyswietlWydarzenia_Result)" />
-          <EntitySet Name="BiletySet" EntityType="BiletyModel.Bilety" />
+          <FunctionImport Name="WyswietlWydarzenia" ReturnType="Collection(BiletyModel.WyswietlWydarzenia_Result2)" />
+          <FunctionImport Name="OdejmijMiejsce">
+          <Parameter Name="idm" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Transakcja">
+            <Parameter Name="idu" Mode="In" Type="String" />
+            <Parameter Name="idm" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Bilety" EntityType="BiletyModel.Bilety" />
+          <AssociationSet Name="FK__Bilety__Id__5BE2A6F2" Association="BiletyModel.FK__Bilety__Id__5BE2A6F2">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Bilety" EntitySet="Bilety" />
+          </AssociationSet>
           <AssociationSet Name="FK__Bilety__IdMiejsc__4D94879B" Association="BiletyModel.FK__Bilety__IdMiejsc__4D94879B">
             <End Role="Miejsca" EntitySet="Miejsca" />
-            <End Role="Bilety1" EntitySet="BiletySet" />
+            <End Role="Bilety" EntitySet="Bilety" />
           </AssociationSet>
-          <AssociationSet Name="FK__Bilety__IdWydarz__49C3F6B71" Association="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71">
-            <End Role="Wydarzenia" EntitySet="Wydarzenia" />
-            <End Role="Bilety1" EntitySet="BiletySet" />
-          </AssociationSet>
+          <FunctionImport Name="PokazCeny" ReturnType="Collection(BiletyModel.PokazCeny_Result2)">
+          <Parameter Name="idwyd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PokazOstatnie" ReturnType="Collection(BiletyModel.PokazOstatnie_Result)" />
         </EntityContainer>
         <ComplexType Name="Podsumowanie_Result">
           <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="50" />
@@ -391,7 +413,6 @@
           <Property Name="Przeciwnik" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="DataWyd" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Miejsca" Relationship="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" FromRole="Wydarzenia" ToRole="Miejsca" />
-          <NavigationProperty Name="Bilety1" Relationship="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71" FromRole="Wydarzenia" ToRole="Bilety1" />
         </EntityType>
         <Association Name="FK__Miejsca__IdWydar__4E88ABD4">
           <End Type="BiletyModel.Wydarzenia" Role="Wydarzenia" Multiplicity="1" />
@@ -409,40 +430,74 @@
           <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="DataWyd" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="WyswietlWydarzenia_Result1">
+          <Property Type="Int32" Name="IdWydarzenia" Nullable="false" />
+          <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DataWyd" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PokazCeny_Result">
+          <Property Type="String" Name="Sektor" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cena" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Int32" Name="Ile_Miejsc" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="WyswietlWydarzenia_Result2">
+          <Property Type="Int32" Name="IdWydarzenia" Nullable="false" />
+          <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DataWyd" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PokazCeny_Result1">
+          <Property Type="String" Name="Sektor" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cena" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Int32" Name="Ile_Miejsc" Nullable="false" />
+        </ComplexType>
         <EntityType Name="Bilety">
           <Key>
             <PropertyRef Name="IdBiletu" />
           </Key>
           <Property Name="IdBiletu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdMiejsca" Type="Int32" Nullable="false" />
-          <Property Name="IdWydarzenia" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Miejsca" Relationship="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" FromRole="Bilety1" ToRole="Miejsca" />
-          <NavigationProperty Name="Wydarzenia" Relationship="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71" FromRole="Bilety1" ToRole="Wydarzenia" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DataTran" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="BiletyModel.FK__Bilety__Id__5BE2A6F2" FromRole="Bilety" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Miejsca" Relationship="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" FromRole="Bilety" ToRole="Miejsca" />
         </EntityType>
+        <Association Name="FK__Bilety__Id__5BE2A6F2">
+          <End Type="BiletyModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="BiletyModel.Bilety" Role="Bilety" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bilety">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Bilety__IdMiejsc__4D94879B">
           <End Type="BiletyModel.Miejsca" Role="Miejsca" Multiplicity="1" />
-          <End Type="BiletyModel.Bilety" Role="Bilety1" Multiplicity="*" />
+          <End Type="BiletyModel.Bilety" Role="Bilety" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Miejsca">
               <PropertyRef Name="IdMiejsca" />
             </Principal>
-            <Dependent Role="Bilety1">
+            <Dependent Role="Bilety">
               <PropertyRef Name="IdMiejsca" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Bilety__IdWydarz__49C3F6B71">
-          <End Type="BiletyModel.Wydarzenia" Role="Wydarzenia" Multiplicity="1" />
-          <End Type="BiletyModel.Bilety" Role="Bilety1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wydarzenia">
-              <PropertyRef Name="IdWydarzenia" />
-            </Principal>
-            <Dependent Role="Bilety1">
-              <PropertyRef Name="IdWydarzenia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="PokazCeny_Result2">
+          <Property Type="Int32" Name="IdMiejsca" Nullable="false" />
+          <Property Type="String" Name="Sektor" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cena" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="Int32" Name="Ile_Miejsc" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="PokazOstatnie_Result">
+          <Property Type="DateTime" Name="DataTran" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Sektor" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cena" Nullable="false" Precision="8" Scale="2" />
+          <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="DataWyd" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -523,7 +578,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="PokazCeny" FunctionName="BiletyModel.Store.PokazCeny" />
           <EntitySetMapping Name="Wydarzenia">
             <EntityTypeMapping TypeName="BiletyModel.Wydarzenia">
               <MappingFragment StoreEntitySet="Wydarzenia">
@@ -536,21 +590,46 @@
           <FunctionImportMapping FunctionImportName="WyswietlPrzeciwnika" FunctionName="BiletyModel.Store.WyswietlPrzeciwnika" />
           <FunctionImportMapping FunctionImportName="WyswietlWydarzenia" FunctionName="BiletyModel.Store.WyswietlWydarzenia">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="BiletyModel.WyswietlWydarzenia_Result">
+              <ComplexTypeMapping TypeName="BiletyModel.WyswietlWydarzenia_Result2">
+                <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
                 <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
                 <ScalarProperty Name="DataWyd" ColumnName="DataWyd" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="BiletySet">
+          <FunctionImportMapping FunctionImportName="OdejmijMiejsce" FunctionName="BiletyModel.Store.OdejmijMiejsce" />
+          <FunctionImportMapping FunctionImportName="Transakcja" FunctionName="BiletyModel.Store.Transakcja" />
+          <EntitySetMapping Name="Bilety">
             <EntityTypeMapping TypeName="BiletyModel.Bilety">
               <MappingFragment StoreEntitySet="Bilety">
-                <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
+                <ScalarProperty Name="DataTran" ColumnName="DataTran" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
                 <ScalarProperty Name="IdBiletu" ColumnName="IdBiletu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PokazCeny" FunctionName="BiletyModel.Store.PokazCeny">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BiletyModel.PokazCeny_Result2">
+                <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
+                <ScalarProperty Name="Sektor" ColumnName="Sektor" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Ile_Miejsc" ColumnName="Ile_Miejsc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PokazOstatnie" FunctionName="BiletyModel.Store.PokazOstatnie">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BiletyModel.PokazOstatnie_Result">
+                <ScalarProperty Name="DataTran" ColumnName="DataTran" />
+                <ScalarProperty Name="Sektor" ColumnName="Sektor" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
+                <ScalarProperty Name="DataWyd" ColumnName="DataWyd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

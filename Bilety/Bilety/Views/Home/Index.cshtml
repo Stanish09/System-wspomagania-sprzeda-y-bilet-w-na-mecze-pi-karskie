@@ -7,6 +7,17 @@
     <h2>Witaj kibicu!</h2>>
     <h5>Witamy na stronie klubu ŚWIT Nowy Dwór Mazowiecki. Zapraszamy do zapoznania się z ofertą biletów na najbliższe mecze oraz informacjami na jego temat!</h5>
 
+    Ostatnio kupione bilety:
+    @*@foreach(var t in ViewBag.Transakcje)
+    {
+    <table>
+
+        <tr>
+            @t.DataTran @t.Sektor @t.Cena @t.Przeciwnik @t.DataWyd
+        </tr>
+    </table>
+    }*@
+
 
 
     <div class="row">

@@ -12,7 +12,14 @@ namespace Bilety.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            using (var ctx3 = new BiletyEntities())
+            {
+    //            var transakcja = ctx3.PokazOstatnie();
+    //            ViewBag.Transakcje = transakcja;
+            }
+
+
+                return View();
         }
 
         public ActionResult About()
@@ -29,7 +36,7 @@ namespace Bilety.Controllers
             return View();
         }
 
-        public ActionResult Tickets()
+        public ActionResult Tickets(int id)
         {
             ViewBag.Message = "Kup bilet na mecz Świtu!";
 
@@ -37,17 +44,37 @@ namespace Bilety.Controllers
 
             using (var ctx = new BiletyEntities())
             {
-                var cena = ctx.PokazCeny().ToList();
-                ViewBag.Cena0 = cena[0];
-                ViewBag.Cena1 = cena[1];
-                ViewBag.Cena2 = cena[2];
-                ViewBag.Cena3 = cena[3];
-                ViewBag.Cena4 = cena[4];
-                ViewBag.Cena5 = cena[5];
+                var cena = ctx.PokazCeny(id).ToList();
+                ViewBag.Cena = cena;
 
-                int idwyd = 0;
-                var przeciwnik = ctx.WyswietlPrzeciwnika(idwyd);
-                ViewBag.Przeciwnik = przeciwnik;
+                var przeciwnik = ctx.WyswietlPrzeciwnika(id).ToList();
+                ViewBag.Przeciwnik = przeciwnik[0];
+            }
+
+            return View();
+        }
+
+        public ActionResult Events()
+        {
+            ViewBag.Message = "Kup bilet na mecz Świtu!";
+            ViewBag.Title = "Kup bilet!";
+            using (var ctx1 = new BiletyEntities())
+            {
+                var przeciwnicy = ctx1.WyswietlWydarzenia().ToList();
+                ViewBag.przec = przeciwnicy;
+
+
+            }
+                return View();
+        }
+
+        public ActionResult Success(int id)
+            {
+
+            using (var ctx2 = new BiletyEntities())
+            {
+            //    ctx2.Transakcja(Session["UserId"].ToString(), id);
+                ctx2.OdejmijMiejsce(id);
 
 
 
@@ -55,9 +82,9 @@ namespace Bilety.Controllers
 
 
 
+                return View();
 
+            }
 
-            return View();
-        }
     }
 }

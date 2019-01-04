@@ -239,12 +239,30 @@
     <Compile Include="Podsumowanie_Result.cs">
       <DependentUpon>BiletyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PokazCeny_Result.cs">
+      <DependentUpon>BiletyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PokazCeny_Result1.cs">
+      <DependentUpon>BiletyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PokazCeny_Result2.cs">
+      <DependentUpon>BiletyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PokazOstatnie_Result.cs">
+      <DependentUpon>BiletyModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Wydarzenia.cs">
       <DependentUpon>BiletyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WyswietlWydarzenia_Result.cs">
+      <DependentUpon>BiletyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WyswietlWydarzenia_Result1.cs">
+      <DependentUpon>BiletyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WyswietlWydarzenia_Result2.cs">
       <DependentUpon>BiletyModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -326,6 +344,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Tickets.cshtml" />
     <Content Include="Views\Home\Events.cshtml" />
+    <Content Include="Views\Home\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

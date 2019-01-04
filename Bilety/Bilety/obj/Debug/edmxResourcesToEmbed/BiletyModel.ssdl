@@ -67,7 +67,8 @@
     </Key>
     <Property Name="IdBiletu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdMiejsca" Type="int" Nullable="false" />
-    <Property Name="IdWydarzenia" Type="int" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DataTran" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Miejsca">
     <Key>
@@ -87,6 +88,18 @@
     <Property Name="Przeciwnik" Type="nchar" MaxLength="100" Nullable="false" />
     <Property Name="DataWyd" Type="date" />
   </EntityType>
+  <Association Name="FK__Bilety__Id__5BE2A6F2">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bilety">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Bilety__IdMiejsc__4D94879B">
     <End Role="Miejsca" Type="Self.Miejsca" Multiplicity="1" />
     <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
@@ -96,18 +109,6 @@
       </Principal>
       <Dependent Role="Bilety">
         <PropertyRef Name="IdMiejsca" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Bilety__IdWydarz__49C3F6B7">
-    <End Role="Wydarzenia" Type="Self.Wydarzenia" Multiplicity="1" />
-    <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Wydarzenia">
-        <PropertyRef Name="IdWydarzenia" />
-      </Principal>
-      <Dependent Role="Bilety">
-        <PropertyRef Name="IdWydarzenia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -179,7 +180,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="PokazCeny" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="OdejmijMiejsce" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idm" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PokazCeny" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idwyd" Type="int" Mode="In" />
+  </Function>
+  <Function Name="PokazOstatnie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Transakcja" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idu" Type="nvarchar" Mode="In" />
+    <Parameter Name="idm" Type="int" Mode="In" />
+  </Function>
   <Function Name="WyswietlPrzeciwnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idwyd" Type="int" Mode="In" />
   </Function>
@@ -194,12 +205,12 @@
     <EntitySet Name="Bilety" EntityType="Self.Bilety" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Miejsca" EntityType="Self.Miejsca" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Wydarzenia" EntityType="Self.Wydarzenia" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Bilety__IdMiejsc__4D94879B" Association="Self.FK__Bilety__IdMiejsc__4D94879B">
-      <End Role="Miejsca" EntitySet="Miejsca" />
+    <AssociationSet Name="FK__Bilety__Id__5BE2A6F2" Association="Self.FK__Bilety__Id__5BE2A6F2">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Bilety" EntitySet="Bilety" />
     </AssociationSet>
-    <AssociationSet Name="FK__Bilety__IdWydarz__49C3F6B7" Association="Self.FK__Bilety__IdWydarz__49C3F6B7">
-      <End Role="Wydarzenia" EntitySet="Wydarzenia" />
+    <AssociationSet Name="FK__Bilety__IdMiejsc__4D94879B" Association="Self.FK__Bilety__IdMiejsc__4D94879B">
+      <End Role="Miejsca" EntitySet="Miejsca" />
       <End Role="Bilety" EntitySet="Bilety" />
     </AssociationSet>
     <AssociationSet Name="FK__Miejsca__IdWydar__4E88ABD4" Association="Self.FK__Miejsca__IdWydar__4E88ABD4">
