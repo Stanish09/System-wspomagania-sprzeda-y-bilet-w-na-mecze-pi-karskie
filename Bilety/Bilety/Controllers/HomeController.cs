@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,8 +15,8 @@ namespace Bilety.Controllers
         {
             using (var ctx3 = new BiletyEntities())
             {
-    //            var transakcja = ctx3.PokazOstatnie();
-    //            ViewBag.Transakcje = transakcja;
+                var transakcja = ctx3.PokazOstatnie().ToList();
+                ViewBag.Transakcje = transakcja;
             }
 
 
@@ -73,7 +74,8 @@ namespace Bilety.Controllers
 
             using (var ctx2 = new BiletyEntities())
             {
-            //    ctx2.Transakcja(Session["UserId"].ToString(), id);
+                var userID = User.Identity.GetUserId();
+                ctx2.Transakcja(userID.ToString(), id);
                 ctx2.OdejmijMiejsce(id);
 
 
