@@ -3,8 +3,29 @@
     ViewBag.Title = "Mecze";
 }
 
+<style>
+    table
+    {
+        border: 2px solid black;
+        width: 500px;
+    }
+
+    td
+    {
+      width: 125px;
 
 
+    }
+
+
+    tr
+    {
+        border: 2px solid black;
+
+    }
+
+
+    </style>
 <div class="jumbotron">
     <h2>@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
@@ -14,14 +35,14 @@
         <table>
             <tr>
                 <td>Przeciwnik</td>
-                <td>Data</td>
+                <td style="border-right: 2px solid black;">Data</td>
             </tr>
             @foreach(var p in ViewBag.przec)
             {
-            
+
             <tr>
                 <td>@p.Przeciwnik</td>
-                <td>@p.DataWyd</td>
+                <td>@p.DataWyd.ToShortDateString()</td>
                 <td> <a href="/Home/Tickets/@p.IdWydarzenia"> <div class="btn btn-default"> BILETY </div></a></td>
             </tr>
 
@@ -36,15 +57,15 @@
 
 
     </p>
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
 
 
 

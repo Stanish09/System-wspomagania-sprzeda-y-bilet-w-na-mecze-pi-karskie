@@ -11,7 +11,7 @@
     @foreach (var t in @ViewBag.Transakcje)
     {
 
-    <text>    @t.DataTran kupiono bilet w sektorze @t.Sektor za @t.Cena zł na mecz, w którym przeciwnikiem będzie @t.Przeciwnik. Mecz odbędzie się @t.DataWyd. </text>
+    <text>    @t.DataTran kupiono bilet w sektorze @t.Sektor za @t.Cena zł na mecz, w którym przeciwnikiem będzie @t.Przeciwnik. Mecz odbędzie się @t.DataWyd.ToShortDateString(). </text>
     <br />
     }
 

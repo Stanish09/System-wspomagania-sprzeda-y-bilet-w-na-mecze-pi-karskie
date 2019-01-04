@@ -3,7 +3,30 @@
     ViewBag.Title = "Bilety";
 }
 
+<style>
+    table
+    {
+        border: 2px solid black;
+        width: 500px;
+    }
 
+    td
+    {
+      width: 125px;  
+
+
+    }
+
+
+    tr
+    {
+        border: 2px solid black;
+
+    }
+
+
+
+</style>
 
 <div class="jumbotron">
     <h2>@ViewBag.Title.</h2>
@@ -18,7 +41,7 @@
             <tr>
                 <td>Sektor</td>
                 <td>Cena</td>
-                <td>Pozostało</td>
+                <td style="border-right: 2px solid black;">Pozostało</td>
             </tr>
             @foreach (var c in ViewBag.Cena)
             {
@@ -27,8 +50,15 @@
                 <td>@c.Cena zł</td>
                 <td>@c.Ile_Miejsc</td>
                 @if (User.Identity.IsAuthenticated)
-                { 
-                    <td><a href="/Home/Success/@c.IdMiejsca"> <div class="btn btn-default"> KUP TERAZ </div></a></td>
+                {
+                    if (@c.Ile_Miejsc > 0)
+                    {
+                        <td><a href="/Home/Success/@c.IdMiejsca"> <div class="btn btn-default"> KUP TERAZ </div></a></td>
+                    }
+                    else
+                    {
+                        <td><div class="btn btn-default">Brak biletów.</div></td>
+                    }
                 }
                 else
                 {
