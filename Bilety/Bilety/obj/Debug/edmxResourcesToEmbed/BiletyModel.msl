@@ -56,31 +56,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Bilety">
-      <EntityTypeMapping TypeName="BiletyModel.Bilety">
-        <MappingFragment StoreEntitySet="Bilety">
-          <ScalarProperty Name="IdBiletu" ColumnName="IdBiletu" />
-          <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
-          <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Miejsca">
       <EntityTypeMapping TypeName="BiletyModel.Miejsca">
         <MappingFragment StoreEntitySet="Miejsca">
+          <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
           <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
           <ScalarProperty Name="Sektor" ColumnName="Sektor" />
           <ScalarProperty Name="Cena" ColumnName="Cena" />
           <ScalarProperty Name="Ile_Miejsc" ColumnName="Ile_Miejsc" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Transakcje">
-      <EntityTypeMapping TypeName="BiletyModel.Transakcje">
-        <MappingFragment StoreEntitySet="Transakcje">
-          <ScalarProperty Name="IdTransakcji" ColumnName="IdTransakcji" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdBiletu" ColumnName="IdBiletu" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -92,15 +75,33 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="Podsumowanie" FunctionName="BiletyModel.Store.Podsumowanie">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="BiletyModel.Podsumowanie_Result">
+    <FunctionImportMapping FunctionImportName="PokazCeny" FunctionName="BiletyModel.Store.PokazCeny" />
+    <EntitySetMapping Name="Wydarzenia">
+      <EntityTypeMapping TypeName="BiletyModel.Wydarzenia">
+        <MappingFragment StoreEntitySet="Wydarzenia">
+          <ScalarProperty Name="DataWyd" ColumnName="DataWyd" />
           <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
-          <ScalarProperty Name="Sektor" ColumnName="Sektor" />
-          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="WyswietlPrzeciwnika" FunctionName="BiletyModel.Store.WyswietlPrzeciwnika" />
+    <FunctionImportMapping FunctionImportName="WyswietlWydarzenia" FunctionName="BiletyModel.Store.WyswietlWydarzenia">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BiletyModel.WyswietlWydarzenia_Result">
+          <ScalarProperty Name="Przeciwnik" ColumnName="Przeciwnik" />
+          <ScalarProperty Name="DataWyd" ColumnName="DataWyd" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PokazCeny" FunctionName="BiletyModel.Store.PokazCeny" />
+    <EntitySetMapping Name="BiletySet">
+      <EntityTypeMapping TypeName="BiletyModel.Bilety">
+        <MappingFragment StoreEntitySet="Bilety">
+          <ScalarProperty Name="IdWydarzenia" ColumnName="IdWydarzenia" />
+          <ScalarProperty Name="IdMiejsca" ColumnName="IdMiejsca" />
+          <ScalarProperty Name="IdBiletu" ColumnName="IdBiletu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

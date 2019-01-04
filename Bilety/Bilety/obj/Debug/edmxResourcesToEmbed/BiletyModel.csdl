@@ -57,18 +57,7 @@
     <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-    <NavigationProperty Name="Transakcje" Relationship="Self.FK__Transakcje__Id__3B75D760" FromRole="AspNetUsers" ToRole="Transakcje" />
     <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-  </EntityType>
-  <EntityType Name="Bilety">
-    <Key>
-      <PropertyRef Name="IdBiletu" />
-    </Key>
-    <Property Name="IdBiletu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdMiejsca" Type="Int32" Nullable="false" />
-    <Property Name="Przeciwnik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Miejsca" Relationship="Self.FK__Bilety__IdMiejsc__38996AB5" FromRole="Bilety" ToRole="Miejsca" />
-    <NavigationProperty Name="Transakcje" Relationship="Self.FK__Transakcj__IdBil__3C69FB99" FromRole="Bilety" ToRole="Transakcje" />
   </EntityType>
   <EntityType Name="Miejsca">
     <Key>
@@ -78,17 +67,9 @@
     <Property Name="Sektor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Cena" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
     <Property Name="Ile_Miejsc" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Bilety" Relationship="Self.FK__Bilety__IdMiejsc__38996AB5" FromRole="Miejsca" ToRole="Bilety" />
-  </EntityType>
-  <EntityType Name="Transakcje">
-    <Key>
-      <PropertyRef Name="IdTransakcji" />
-    </Key>
-    <Property Name="IdTransakcji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="IdBiletu" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK__Transakcje__Id__3B75D760" FromRole="Transakcje" ToRole="AspNetUsers" />
-    <NavigationProperty Name="Bilety" Relationship="Self.FK__Transakcj__IdBil__3C69FB99" FromRole="Transakcje" ToRole="Bilety" />
+    <Property Name="IdWydarzenia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Wydarzenia" Relationship="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" FromRole="Miejsca" ToRole="Wydarzenia" />
+    <NavigationProperty Name="Bilety1" Relationship="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" FromRole="Miejsca" ToRole="Bilety1" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -118,42 +99,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Transakcje__Id__3B75D760">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-    <End Role="Transakcje" Type="Self.Transakcje" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Transakcje">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Bilety__IdMiejsc__38996AB5">
-    <End Role="Miejsca" Type="Self.Miejsca" Multiplicity="1" />
-    <End Role="Bilety" Type="Self.Bilety" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Miejsca">
-        <PropertyRef Name="IdMiejsca" />
-      </Principal>
-      <Dependent Role="Bilety">
-        <PropertyRef Name="IdMiejsca" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Transakcj__IdBil__3C69FB99">
-    <End Role="Bilety" Type="Self.Bilety" Multiplicity="1" />
-    <End Role="Transakcje" Type="Self.Transakcje" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Bilety">
-        <PropertyRef Name="IdBiletu" />
-      </Principal>
-      <Dependent Role="Transakcje">
-        <PropertyRef Name="IdBiletu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="AspNetUserRoles">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -164,9 +109,7 @@
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-    <EntitySet Name="Bilety" EntityType="Self.Bilety" />
     <EntitySet Name="Miejsca" EntityType="Self.Miejsca" />
-    <EntitySet Name="Transakcje" EntityType="Self.Transakcje" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -174,18 +117,6 @@
     <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Transakcje__Id__3B75D760" Association="Self.FK__Transakcje__Id__3B75D760">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Transakcje" EntitySet="Transakcje" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Bilety__IdMiejsc__38996AB5" Association="Self.FK__Bilety__IdMiejsc__38996AB5">
-      <End Role="Miejsca" EntitySet="Miejsca" />
-      <End Role="Bilety" EntitySet="Bilety" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Transakcj__IdBil__3C69FB99" Association="Self.FK__Transakcj__IdBil__3C69FB99">
-      <End Role="Bilety" EntitySet="Bilety" />
-      <End Role="Transakcje" EntitySet="Transakcje" />
     </AssociationSet>
     <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -196,10 +127,88 @@
       <Parameter Name="param2" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="PokazCeny" ReturnType="Collection(Decimal)" />
+    <EntitySet Name="Wydarzenia" EntityType="BiletyModel.Wydarzenia" />
+    <AssociationSet Name="FK__Miejsca__IdWydar__4E88ABD4" Association="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4">
+      <End Role="Wydarzenia" EntitySet="Wydarzenia" />
+      <End Role="Miejsca" EntitySet="Miejsca" />
+    </AssociationSet>
+    <FunctionImport Name="WyswietlPrzeciwnika" ReturnType="Collection(String)">
+      <Parameter Name="idwyd" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="WyswietlWydarzenia" ReturnType="Collection(BiletyModel.WyswietlWydarzenia_Result)" />
+    <EntitySet Name="BiletySet" EntityType="BiletyModel.Bilety" />
+    <AssociationSet Name="FK__Bilety__IdMiejsc__4D94879B" Association="BiletyModel.FK__Bilety__IdMiejsc__4D94879B">
+      <End Role="Miejsca" EntitySet="Miejsca" />
+      <End Role="Bilety1" EntitySet="BiletySet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Bilety__IdWydarz__49C3F6B71" Association="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71">
+      <End Role="Wydarzenia" EntitySet="Wydarzenia" />
+      <End Role="Bilety1" EntitySet="BiletySet" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="Podsumowanie_Result">
     <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Sektor" Nullable="false" MaxLength="10" />
     <Property Type="Decimal" Name="Cena" Nullable="false" Precision="8" Scale="2" />
   </ComplexType>
+  <EntityType Name="Wydarzenia">
+    <Key>
+      <PropertyRef Name="IdWydarzenia" />
+    </Key>
+    <Property Name="IdWydarzenia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Przeciwnik" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="DataWyd" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Miejsca" Relationship="BiletyModel.FK__Miejsca__IdWydar__4E88ABD4" FromRole="Wydarzenia" ToRole="Miejsca" />
+    <NavigationProperty Name="Bilety1" Relationship="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71" FromRole="Wydarzenia" ToRole="Bilety1" />
+  </EntityType>
+  <Association Name="FK__Miejsca__IdWydar__4E88ABD4">
+    <End Type="BiletyModel.Wydarzenia" Role="Wydarzenia" Multiplicity="1" />
+    <End Type="BiletyModel.Miejsca" Role="Miejsca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wydarzenia">
+        <PropertyRef Name="IdWydarzenia" />
+      </Principal>
+      <Dependent Role="Miejsca">
+        <PropertyRef Name="IdWydarzenia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="WyswietlWydarzenia_Result">
+    <Property Type="String" Name="Przeciwnik" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="DataWyd" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Bilety">
+    <Key>
+      <PropertyRef Name="IdBiletu" />
+    </Key>
+    <Property Name="IdBiletu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdMiejsca" Type="Int32" Nullable="false" />
+    <Property Name="IdWydarzenia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Miejsca" Relationship="BiletyModel.FK__Bilety__IdMiejsc__4D94879B" FromRole="Bilety1" ToRole="Miejsca" />
+    <NavigationProperty Name="Wydarzenia" Relationship="BiletyModel.FK__Bilety__IdWydarz__49C3F6B71" FromRole="Bilety1" ToRole="Wydarzenia" />
+  </EntityType>
+  <Association Name="FK__Bilety__IdMiejsc__4D94879B">
+    <End Type="BiletyModel.Miejsca" Role="Miejsca" Multiplicity="1" />
+    <End Type="BiletyModel.Bilety" Role="Bilety1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Miejsca">
+        <PropertyRef Name="IdMiejsca" />
+      </Principal>
+      <Dependent Role="Bilety1">
+        <PropertyRef Name="IdMiejsca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Bilety__IdWydarz__49C3F6B71">
+    <End Type="BiletyModel.Wydarzenia" Role="Wydarzenia" Multiplicity="1" />
+    <End Type="BiletyModel.Bilety" Role="Bilety1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Wydarzenia">
+        <PropertyRef Name="IdWydarzenia" />
+      </Principal>
+      <Dependent Role="Bilety1">
+        <PropertyRef Name="IdWydarzenia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
